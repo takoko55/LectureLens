@@ -15,7 +15,7 @@ export const Lecture = (props) => {
 
   return (
     <>
-      { searchFlag && count_array.length === flag_array.length && <tr><td>{details.name}　<a className={details.class} href={details.url} target="_blank"><i className="far fa-file-alt icon"></i></a></td><td>{details.year_term}</td><td>{details.professor_name}</td><td>{details.key}</td></tr>}
+      { searchFlag && count_array.length === flag_array.length && <tr><td>{details.name} <a className={details.class} href={details.url} target="_blank" rel='noreferrer'><i className="far fa-file-alt icon"></i></a></td><td>{details.year_term}</td><td>{details.professor_name}</td><td>{details.key}</td></tr>}
     </>
   );
 };
