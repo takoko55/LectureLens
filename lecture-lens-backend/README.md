@@ -59,19 +59,51 @@ modelはデータの定義、repository はDBと直接のやりとり、usecase 
 ## model
 データの定義を行う。Userというデータを操作したい場合は以下のように定義する。
 ```Go
-// ./model/model.go
+// ./model/user.go
 
-type User struct {
-	ID        uint      `json:"id" gorm:"primaryKey"`
-	Email     string    `json:"email" gorm:"unique"`
-	Password  string    `json:"password"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+package model
+
+type Review struct {
+	ReviewID        uint      `json:"review_id" gorm:"primaryKey"`
+	ReviewerID      string    `json:"reviewer_id"`
+	ReviewerName    string    `json:"reviewer_name"`
+	LectureID       uint      `json:"lecture_id"`
+	Review_Content  string    `json:"review_content"`
+	Review_Star     uint      `json:"review_star"`
 }
 
-type UserResponse struct {
-	ID    uint   `json:"id" gorm:"primaryKey"`
-	Email string `json:"email" gorm:"unique"`
+type ReviewResponse struct {
+	ReviewID        uint      `json:"review_id" gorm:"primaryKey"`
+	LectureID       uint      `json:"lecture_id"`
+	ReviewerName    string    `json:"reviewer_name"`
+	Review_content  string    `json:"review_content"`
+	Review_star     uint      `json:"review_star"`
+}
+
+
+```
+
+また，Reviewについても同様に定義する．
+```Go
+// ./model/review.go
+
+package model
+
+type Review struct {
+	ReviewID        uint      `json:"review_id" gorm:"primaryKey"`
+	ReviewerID      string    `json:"reviewer_id"`
+	ReviewerName    string    `json:"reviewer_name"`
+	LectureID       uint      `json:"lecture_id"`
+	Review_Content  string    `json:"review_content"`
+	Review_Star     uint      `json:"review_star"`
+}
+
+type ReviewResponse struct {
+	ReviewID        uint      `json:"review_id" gorm:"primaryKey"`
+	LectureID       uint      `json:"lecture_id"`
+	ReviewerName    string    `json:"reviewer_name"`
+	Review_content  string    `json:"review_content"`
+	Review_star     uint      `json:"review_star"`
 }
 
 ```
