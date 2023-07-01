@@ -39,24 +39,48 @@ func (uu *reviewUsecase) PostReview(review model.Review) (model.ReviewResponse, 
 	return resReview, nil
 }
 
-func (uu *reviewUsecase) GetReview(review model.Review) (string, error) {
+func (uu *reviewUsecase) GetReview(review model.Review) (model.ReviewResponse, error) {
 	// ユーザが存在するか調べる
 	if err := uu.uv.ReviewValidate(review); err != nil {
-		return "", err
+		return model.ReviewResponse{}, err
 	}
 	// ユーザが存在していれば、保存されているユーザ情報を持ってくる
 	storedReview := model.Review{}
-	if err := uu.ur.GetReviewByLectureID(&storedReview, review.lectureID); err != nil {
-		return "", err
+	if err := uu.ur.GetReviewByLectureID(&storedReview, review.LectureID); err != nil {
+		return model.ReviewResponse{}, err
 	}
 	
-	// パスワードが合致するか調べる
-	err := bcrypt.CompareHashAndPassword([]byte(storedReview.Password), []byte(review.Password))
-	if err != nil {
-		return "", err
+	resReview := model.ReviewResponse{
+		ReviewID:       storedReview.ReviewID,
+		ReviewerName:   storedReview.ReviewerName,
+		ReviewContent:  storedReview.ReviewContent,
+		ReviewStar:     storedReview.ReviewStar,
 	}
-	return nil
+
+	return resReview, nil
 }
+
+// 修正前
+// func (uu *reviewUsecase) GetReview(review model.Review) (string, error) {
+// 	// ユーザが存在するか調べる
+// 	if err := uu.uv.ReviewValidate(review); err != nil {
+// 		return "", err
+// 	}
+// 	// ユーザが存在していれば、保存されているユーザ情報を持ってくる
+// 	storedReview := model.Review{}
+// 	if err := uu.ur.GetReviewByLectureID(&storedReview, review.lectureID); err != nil {
+// 		return "", err
+// 	}
+	
+
+
+// 	// パスワードが合致するか調べる
+// 	err := bcrypt.CompareHashAndPassword([]byte(storedReview.Password), []byte(review.Password))
+// 	if err != nil {
+// 		return "", err
+// 	}
+// 	return nil
+// }
 // 	// Cookieにトークンを入れておく
 // 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 // 		"review_id": storedReview.ID,

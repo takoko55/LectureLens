@@ -11,16 +11,17 @@ import (
 
 func main() {
 	db := db.NewDB()
+	//User関連
 	userValidator := validator.NewUserValidator()
-	// taskValidator := validator.NewTaskValidator()
 	userRepository := repository.NewUserRepository(db)
-	// 追記 - Reviewの定義
-	reviewRepository := repository.NewReviewRepository(db)
-	// taskRepository := repository.NewTaskRepository(db)
 	userUsecase := usecase.NewUserUsecase(userRepository, userValidator)
-	// taskUsecase := usecase.NewTaskUsecase(taskRepository, taskValidator)
 	userController := controller.NewUserController(userUsecase)
-	// taskController := controller.NewTaskController(taskUsecase)
-	e := router.NewRouter(userController)
+
+	// 追記 - Review
+	reviewValidator := validator.NewReviewValidator()
+	reviewRepository := repository.NewReviewRepository(db)
+	reviewUsecase := usecase.NewReviewUsecase(reviewRepository, reviewValidator)
+	reviewController := controller.NewReviewController(reviewUsecase)
+	e := router.NewRouter(userController, reviewController)
 	e.Logger.Fatal(e.Start(":8080"))
 }
