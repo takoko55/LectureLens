@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useMutateAuth } from '../../hooks/useMutateAuth'
 import { Link } from 'react-router-dom'
 export const Auth = () => {
+    const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [pw, setPw] = useState('')
     const [isLogin, setIsLogin] = useState(true)
@@ -10,12 +11,11 @@ export const Auth = () => {
 
     const submitAuthHandler = async (e) => {
         e.preventDefault()
-        console.log(email, pw)
         if (isLogin) {
-          loginMutation.mutate({ email: email, password: pw})
+          loginMutation.mutate({ username: username, email: email, password: pw})
         } else {
-          await registerMutation.mutateAsync({ email: email, password: pw })
-          .then(() => loginMutation.mutate({ email: email, password: pw }))
+          await registerMutation.mutateAsync({usernane: username, email: email, password: pw })
+          .then(() => loginMutation.mutate({username: username, email: email, password: pw }))
         }
     }
     return (
@@ -27,6 +27,17 @@ export const Auth = () => {
           </div>
           <h2 className="my-6">{isLogin ? 'Login' : 'Create a new account'}</h2>
           <form onSubmit={submitAuthHandler}>
+          <div>
+              <input
+                className="mb-3 px-3 text-sm py-2 border border-gray-300"
+                name="username"
+                type="username"
+                autoFocus
+                placeholder="Username (displayname)"
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
+              />
+            </div>
             <div>
               <input
                 className="mb-3 px-3 text-sm py-2 border border-gray-300"
