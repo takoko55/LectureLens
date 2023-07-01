@@ -32,11 +32,11 @@ func (uu *userUsecase) SignUp(user model.User) (model.UserResponse, error) {
 	}
 	// Userの構造体に含まれている4要素をここで定義．
 	newUser := model.User{Email: user.Email, Password: string(hash), UserID:user.UserID, UserName:user.UserName}
+	UserID, err := bcrypt.GenerateFromPassword([]byte(user.Email), 10)
 	if err := uu.ur.CreateUser(&newUser); err != nil {
 		return model.UserResponse{}, err
 	}
 	// IDはUserに入力してもらうのではなく，Emailを元にhashにした値にする．
-	UserID, err := bcrypt.GenerateFromPassword([]byte(user.Email), 10)
 	resUser := model.UserResponse{
 		UserID: newUser.UserID,
 		Email:  newUser.Email,
