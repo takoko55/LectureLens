@@ -4,78 +4,51 @@ import (
 	"kadai-notifier/model"
 	"kadai-notifier/usecase"
 	"net/http"
-	"os"
-	"time"
 
 	"github.com/labstack/echo/v4"
 )
 
 type IReviewController interface {
-	SignUp(c echo.Context) error
-	LogIn(c echo.Context) error
-	LogOut(c echo.Context) error
-	CsrfToken(c echo.Context) error
+	GetReview(c echo.Context) error
+	PostReview(c echo.Context) error
 }
 
 type reviewController struct {
-	uu usecase.IReviewUsecase
+	ru usecase.IReviewUsecase
 }
 
-func NewReviewController(uu usecase.IReviewUsecase) IReviewController {
-	return &reviewController{uu}
+func NewReviewController(ru usecase.IReviewUsecase) IReviewController {
+	return &reviewController{ru}
 }
 
-func (uc *reviewController) SignUp(c echo.Context) error {
+func (rc *reviewController) GetReview(c echo.Context) error {
+	// リクエストパラメータからレビュー情報を取得するなどの処理を行う
 	review := model.Review{}
 	if err := c.Bind(&review); err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}
-	reviewRes, err := uc.uu.SignUp(review)
+
+	// レビュー情報の取得をUseCaseに委譲する
+	resReview, err := rc.ru.GetReview(review)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
-	return c.JSON(http.StatusCreated, reviewRes)
+
+	return c.JSON(http.StatusOK, resReview)
 }
 
-func (uc *reviewController) LogIn(c echo.Context) error {
+func (rc *reviewController) PostReview(c echo.Context) error {
+	// リクエストボディからレビュー情報を取得するなどの処理を行う
 	review := model.Review{}
 	if err := c.Bind(&review); err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}
-	tokenString, err := uc.uu.Login(review)
+
+	// レビューの投稿をUseCaseに委譲する
+	resReview, err := rc.ru.PostReview(review)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
-	cookie := new(http.Cookie)
-	cookie.Name = "token"
-	cookie.Value = tokenString
-	cookie.Expires = time.Now().Add(24 * time.Hour)
-	cookie.Path = "/"
-	cookie.Domain = os.Getenv("API_DOMAIN")
-	cookie.Secure = true
-	cookie.HttpOnly = true
-	cookie.SameSite = http.SameSiteNoneMode
-	c.SetCookie(cookie)
-	return c.NoContent(http.StatusOK)
-}
 
-func (uc *reviewController) LogOut(c echo.Context) error {
-	cookie := new(http.Cookie)
-	cookie.Name = "token"
-	cookie.Value = ""
-	cookie.Expires = time.Now()
-	cookie.Path = "/"
-	cookie.Domain = os.Getenv("API_DOMAIN")
-	cookie.Secure = true
-	cookie.HttpOnly = true
-	cookie.SameSite = http.SameSiteNoneMode
-	c.SetCookie(cookie)
-	return c.NoContent(http.StatusOK)
-}
-
-func (uc *reviewController) CsrfToken(c echo.Context) error {
-	token := c.Get("csrf").(string)
-	return c.JSON(http.StatusOK, echo.Map{
-		"csrf_token": token,
-	})
+	return c.JSON(http.StatusCreated, resReview)
 }
