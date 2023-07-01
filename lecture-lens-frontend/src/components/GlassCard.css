@@ -9,6 +9,8 @@
   margin: 10px;
   color: white;
   text-align: center;
+  font-family: "Yu Mincho";
+  padding: 10px;
 }
 
 .glass-card:hover {
@@ -27,18 +29,17 @@
 
 .glass-card__image-container {
   padding: 5px;
+  background-color: ;
 }
 
 .className {
   font-weight: bold;
   margin: 3px 0px 3px 0px;
   color: rgb(255, 255, 255);
+  padding: 3px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.315);
 }
 
 .lecture-icon {
   display: flex;
-}
-
-.icon {
-  color: rgb(255, 209, 104);
 }

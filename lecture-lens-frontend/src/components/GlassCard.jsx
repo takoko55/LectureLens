@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./GlassCard.css";
 import VanillaTilt from "vanilla-tilt";
-import { FaFileAlt } from "react-icons/fa";
 
 export const GlassCard = (props) => {
   const { details, filterClass, searchText } = props;
@@ -74,17 +73,7 @@ export const GlassCard = (props) => {
               <p className="className">{details.name}</p>
               <p>{details.year_term}</p>
               <p>{details.professor_name}</p>
-              <div
-                className="lecture-icon"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <p style={{ marginRight: "15px" }}>{details.key}</p>
-                <FaFileAlt className="icon" />
-              </div>
+              <p>{details.key}</p>
             </div>
           </div>
         </a>

@@ -14,11 +14,20 @@ table {
 }
 
 .header {
+  padding: 20px 20px;
+  display: flex;
+  border-bottom: solid 1px #fff;
+}
+
+.header-title {
   font-family: "Times New Roman", Times, serif;
   letter-spacing: 15px;
-  padding: 20px 20px;
   color: rgb(255, 255, 255);
-  border-bottom-style: ridge;
+}
+
+.icon {
+  color: white;
+  font-size: 200%;
 }
 
 h1 {
@@ -77,35 +86,39 @@ table tr:last-child {
 }
 
 .input-button:hover {
-  background-color: #0073ff;
-  cursor: pointer;
+  background-color: white;
+  color: rgba(20, 56, 115, 0.5);
+  transform: scale(1.1);
 }
 
 .input-button {
-  width: 80px;
+  width: 60px;
   height: 30px;
   margin: 10px;
   border-radius: 4px;
-  background: #0a2e82;
+  background: rgba(20, 56, 115, 0.5);
   color: white;
   border: none;
   font-weight: bold;
   font-size: 16px;
+  transition: 0.3s cubic-bezier(0.5, 1, 0.89, 1);
 }
 
 .reset-button:hover {
-  background-color: #353b42;
-  cursor: pointer;
+  background: #fff;
+  color: rgba(20, 56, 115, 0.5);
+  transform: scale(1.1);
 }
 
 .reset-button {
-  width: 80px;
+  width: 60px;
   height: 30px;
   margin: 10px 10px 10px 0px;
   border-radius: 4px;
-  background: gray;
+  background: rgb(166, 167, 181);
   color: white;
   border: none;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 12px;
+  transition: 0.3s cubic-bezier(0.5, 1, 0.89, 1);
 }

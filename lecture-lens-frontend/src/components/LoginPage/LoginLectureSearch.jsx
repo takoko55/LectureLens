@@ -1,8 +1,8 @@
 import { React, useState, useRef } from "react";
-import "./SyllabusSearch.css";
+import "../SyllabusSearch/SyllabusSearch.css";
 import Syllabus from "../../data/syllabus_map.json";
 import { GlassCard } from "../GlassCard";
-import { Link } from "react-router-dom";
+import { MdOutlineLogout } from "react-icons/md";
 
 export const LoginLectureSearch = () => {
   const [searchText, setSearchText] = useState("");
@@ -50,9 +50,11 @@ export const LoginLectureSearch = () => {
     <>
       <div className="page">
         <div className="header">
-          <h1>Lecture Lens</h1>
+          <h1 class="header-title">Lecture Lens</h1>
+          <a href="/Auth">
+            <MdOutlineLogout className="icon" />
+          </a>
         </div>
-        <Link to="/Auth">Login</Link>
         <div className="search-form">
           <div className="check-box-1">
             <label>
