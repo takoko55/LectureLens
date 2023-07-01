@@ -1,8 +1,8 @@
 import { React, useState, useRef } from "react";
 import "./SyllabusSearch.css";
-import { Lecture } from "./Lecture";
 import Syllabus from "../../data/syllabus_map.json";
 import { GlassCard } from "../GlassCard";
+import { Link } from "react-router-dom";
 
 export const SyllabusSearch = () => {
   const [searchText, setSearchText] = useState("");
@@ -52,6 +52,7 @@ export const SyllabusSearch = () => {
         <div className="header">
           <h1>Lecture Lens</h1>
         </div>
+        <Link to="/Auth">Login</Link>
         <div className="search-form">
           <div className="check-box-1">
             <label>

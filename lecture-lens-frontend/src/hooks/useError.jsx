@@ -4,7 +4,7 @@ import useStore from '../store'
 
 export const useError = () => {
     const navigate = useNavigate()
-    // resetEditedTask = useStore((state) => state.resetEditedTask)
+    const resetEditedReview = useStore((state) => state.resetEditedReview)
     const getCsrfToken = async() => {
         const { data }  = await axios.get(`${process.env.REACT_APP_API_URL}/csrf`)
         // CSRFトークンをヘッダーに設定
@@ -19,12 +19,12 @@ export const useError = () => {
                 break
             case 'invalid or expired jwt':
                 alert('access token expired, please login')
-                // resetEditedTask()
+                resetEditedReview()
                 navigate('/')
                 break
             case 'missing or malformed jwt':
                 alert('access token is not valid, please login')
-                // resetEditedTask()
+                resetEditedReview()
                 navigate('/')
                 break
             case 'duplicated key not allowed':

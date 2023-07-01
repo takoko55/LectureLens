@@ -1,7 +1,7 @@
-import { useState, FormEvent } from 'react'
+import { useState } from 'react'
 // import { CheckBadgeIcon, ArrowPathIcon } from '@heroicons/react/24/solid'
 import { useMutateAuth } from '../../hooks/useMutateAuth'
-
+import { Link } from 'react-router-dom'
 export const Auth = () => {
     const [email, setEmail] = useState('')
     const [pw, setPw] = useState('')
@@ -10,11 +10,12 @@ export const Auth = () => {
 
     const submitAuthHandler = async (e) => {
         e.preventDefault()
+        console.log(email, pw)
         if (isLogin) {
-            await loginMutation.mutateAsync({ email, pw })
+          loginMutation.mutate({ email: email, password: pw})
         } else {
-            await registerMutation.mutateAsync({ email, pw })
-            .then(() => loginMutation.mutateAsync({ email, pw }))
+          await registerMutation.mutateAsync({ email: email, password: pw })
+          .then(() => loginMutation.mutate({ email: email, password: pw }))
         }
     }
     return (
@@ -57,11 +58,12 @@ export const Auth = () => {
               </button>
             </div>
           </form>
-          <a
+          <p
             onClick={() => setIsLogin(!isLogin)}
             className="h-6 w-6 my-2 text-blue-500 cursor-pointer">
             {isLogin ? 'Create Account' : 'Back to Login'}
-          </a>
+          </p>
+          <Link to="/"><button className="back-button">Home</button></Link>
         </div>
       )
 }

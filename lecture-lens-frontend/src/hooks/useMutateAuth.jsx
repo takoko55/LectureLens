@@ -6,7 +6,7 @@ import { useError } from '../hooks/useError'
 
 export const useMutateAuth = () => {
     const navigate = useNavigate()
-    const resetEditedTask = useStore((state) => state.resetEditedTask)
+    const resetEditedReview = useStore((state) => state.resetEditedReveiw)
     const { switchErrorHandling } = useError()
     
     const loginMutation = useMutation(
@@ -14,9 +14,10 @@ export const useMutateAuth = () => {
             await axios.post(`${process.env.REACT_APP_API_URL}/login`, user),
             {
                 onSuccess: () => {
-                    navigate("/LoginTopPage")
+                    navigate("/LoginLectureSearch")
                 },
-                onError: (err) => {
+                onError: (err, user) => {
+                    console.log(user)
                     if (err.response.data.message) {
                         switchErrorHandling(err.response.data.message)
                     } else {
@@ -47,7 +48,8 @@ export const useMutateAuth = () => {
                 // これわからん
                 // resetEditedTask()
                 // ログアウトした場合はTopPageに遷移
-                navigate("/TopPage")
+                resetEditedReview()
+                navigate("/")
             },
             onError: (err) => {
                 if (err.response.data.message) {

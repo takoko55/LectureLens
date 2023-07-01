@@ -1,12 +1,12 @@
 import { create } from 'zustand'
 
 const useStore = create((set) => ({
-  editedTask: { id: 0, title: '' },
-  updateEditedTask: (payload) =>
+  editedReview: { id: 0, title: '' },
+  updateEditedReview: (payload) =>
     set({
-      editedTask: payload,
+      editedReivew: payload,
     }),
-  resetEditedTask: () => set({ editedTask: { id: 0, title: '' } }),
+  resetEditedReview: () => set({ editedReview: { id: 0, title: '' } }),
 }))
 
 export default useStore
