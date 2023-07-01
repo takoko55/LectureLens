@@ -61,5 +61,23 @@ export const useMutateAuth = () => {
         }
     )
 
+    const isLoginMutation = useMutation(
+        async (user) => 
+            await axios.post(`${process.env.REACT_APP_API_URL}/login`, user),
+            {
+                onSuccess: () => {
+                    navigate("/LoginLectureSearch")
+                },
+                onError: (err, user) => {
+                    console.log(user)
+                    if (err.response.data.message) {
+                        switchErrorHandling(err.response.data.message)
+                    } else {
+                        switchErrorHandling(err.response.data)
+                    }
+                },
+            }
+    )
+
     return { loginMutation, registerMutation, logoutMutation }
 }

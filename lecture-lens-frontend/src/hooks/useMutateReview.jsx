@@ -10,7 +10,7 @@ export const useMutateTask = () => {
 
   
   const createReviewMutation = useMutation(
-    (task) =>
+    (review) =>
       axios.post(`${process.env.REACT_APP_API_URL}/reivews`, review),
     {
       onSuccess: (res) => {
