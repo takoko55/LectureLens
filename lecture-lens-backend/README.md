@@ -63,24 +63,22 @@ modelはデータの定義、repository はDBと直接のやりとり、usecase 
 
 package model
 
-type Review struct {
-	ReviewID        uint      `json:"review_id" gorm:"primaryKey"`
-	ReviewerID      string    `json:"reviewer_id"`
-	ReviewerName    string    `json:"reviewer_name"`
-	LectureID       uint      `json:"lecture_id"`
-	Review_Content  string    `json:"review_content"`
-	Review_Star     uint      `json:"review_star"`
+import "time"
+
+type User struct {
+	UserID    uint      `json:"userid" gorm:"primaryKey"`
+	UserName  string    `json:username`
+	Email     string    `json:"email" gorm:"unique"`
+	Password  string    `json:"password"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
-type ReviewResponse struct {
-	ReviewID        uint      `json:"review_id" gorm:"primaryKey"`
-	LectureID       uint      `json:"lecture_id"`
-	ReviewerName    string    `json:"reviewer_name"`
-	Review_content  string    `json:"review_content"`
-	Review_star     uint      `json:"review_star"`
+type UserResponse struct {
+	UserID    uint      `json:"userid" gorm:"primaryKey"`
+	UserName  string    `json:username`
+	Email     string    `json:"email" gorm:"unique"`
 }
-
-
 ```
 
 また，Reviewについても同様に定義する．
