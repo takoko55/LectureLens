@@ -1,20 +1,12 @@
-
-
 .search-form div {
-  padding: 10px
+  padding: 10px;
 }
 
-div, table {
-  text-align:center;
-  margin-left:auto;
-  margin-right:auto;
-}
-
-.header {
-  font-family: 'Julius Sans One', sans-serif;
-  padding: 20px 20px;
-  background-color: #092F82;
-  color: white;
+div,
+table {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 h1 {
@@ -33,14 +25,14 @@ table {
 }
 
 table tr th {
-  color: #092F82;
-  border-bottom: 1px solid #092F82;
+  color: #092f82;
+  border-bottom: 1px solid #092f82;
 }
 
 table tr {
   background-color: #fff;
-  padding: .35em;
-  border-bottom: 1px dotted #092F82;
+  padding: 0.35em;
+  border-bottom: 1px dotted #092f82;
 }
 
 table th,
@@ -48,21 +40,20 @@ table td {
   padding: 1em 10px 1em 1em;
 }
 
-
 table tr:last-child {
-  border-bottom: 2px solid #092F82;
+  border-bottom: 2px solid #092f82;
 }
 
 .lecture-name {
   width: 50%;
-  min-width: 400px
+  min-width: 400px;
 }
 
 .search-form {
   padding: 50px;
   margin: 30px;
   border-radius: 10px;
-  background-color: #F0F0F2;
+  background-color: #f0f0f2;
 }
 
 .check-box-1 label {
@@ -71,9 +62,9 @@ table tr:last-child {
 
 .text-input {
   outline: none;
-  height:30px;
+  height: 30px;
   width: 200px;
-  padding:0 10px;
+  padding: 0 10px;
   border-radius: 4px;
 }
 
@@ -83,15 +74,15 @@ table tr:last-child {
 }
 
 .input-button {
-  width:80px;
-  height:30px;
+  width: 80px;
+  height: 30px;
   margin: 10px;
-  border-radius:4px;
-  background: #0A2E82;
+  border-radius: 4px;
+  background: #0a2e82;
   color: white;
-  border:none;
-  font-weight:bold;
-  font-size:16px;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 .reset-button:hover {
@@ -100,13 +91,13 @@ table tr:last-child {
 }
 
 .reset-button {
-  width:80px;
-  height:30px;
+  width: 80px;
+  height: 30px;
   margin: 10px 10px 10px 0px;
-  border-radius:4px;
+  border-radius: 4px;
   background: gray;
   color: white;
-  border:none;
-  font-weight:bold;
-  font-size:16px;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
 }
