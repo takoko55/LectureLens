@@ -20,6 +20,8 @@
 go mod init go-rest-api
 # start db
 docker compose up -d
+# 上記または下記
+docker-compose up -d
 # remove db
 docker compose rm -s -f -v
 # start app
@@ -57,12 +59,17 @@ modelはデータの定義、repository はDBと直接のやりとり、usecase 
 # 各部品の説明
 
 ## model
-データの定義を行う。Userというデータを操作したい場合は以下のように定義する。
+データの定義を行う。userというデータを操作したい場合は以下のように定義する。
 ```Go
-// ./model/model.go
+// ./model/user.go
+
+package model
+
+import "time"
 
 type User struct {
-	ID        uint      `json:"id" gorm:"primaryKey"`
+	UserID    uint      `json:"userid" gorm:"primaryKey"`
+	UserName  string    `json:"username"`
 	Email     string    `json:"email" gorm:"unique"`
 	Password  string    `json:"password"`
 	CreatedAt time.Time `json:"created_at"`
@@ -70,13 +77,36 @@ type User struct {
 }
 
 type UserResponse struct {
-	ID    uint   `json:"id" gorm:"primaryKey"`
-	Email string `json:"email" gorm:"unique"`
+	UserID   uint   `json:"userid" gorm:"primaryKey"`
+	UserName string `json:"username"`
+	Email    string `json:"email" gorm:"unique"`
 }
 
 ```
+また，reviewというデータを操作したい場合は以下のように定義される。
 
-これをもとにしてDBにテーブルが作成されると考えてもよい。UserReseponseはAPIとして返すデータを示している。
+```Go
+package model
+
+type Review struct {
+	ReviewID        uint      `json:"review_id" gorm:"primaryKey"`
+	ReviewerID      string    `json:"reviewer_id"`
+	ReviewerName    string    `json:"reviewer_name"`
+	LectureID       uint      `json:"lecture_id"`
+	ReviewContent  string    `json:"review_content"`
+	ReviewStar     uint      `json:"review_star"`
+}
+
+type ReviewResponse struct {
+	ReviewID        uint      `json:"review_id" gorm:"primaryKey"`
+	LectureID       uint      `json:"lecture_id"`
+	ReviewerName    string    `json:"reviewer_name"`
+	ReviewContent   string    `json:"review_content"`
+	ReviewStar      uint      `json:"review_star"`
+}
+```
+
+以上をもとにしてDBにテーブルが作成されると考えてもよい。UserReseponseはAPIとして返すデータを示している。
 
 GormはGo言語用のフレームワーク。
 
@@ -86,7 +116,7 @@ __参考リンク__
 
 ## repository
 
-DBとのやりとりを記述する。定義されたデータ(model)を利用してDBからデータを引っ張ってきたり操作したりして、
+DBとのやりとりを記述する。定義されたデータ(model)を利用してDBからデータを引っ張ってきたり操作したり。
 
 ```Go
 // ./repository/user_repository.go
@@ -128,6 +158,7 @@ func (ur *userRepository) CreateUser(user *model.User) error {
 	}
 	return nil
 }
+
 ```
 
 メソッドは以下のように書く
@@ -168,20 +199,16 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-// model.Userを受け取って、model.UserResponseを返す
-// Goで定義した構造体でのやりとり
 type IUserUsecase interface {
 	SignUp(user model.User) (model.UserResponse, error)
 	Login(user model.User) (string, error)
 }
 
-// ここでurとかuvとかを定義しておくと、メソッド内で使える
 type userUsecase struct {
 	ur repository.IUserRepository
 	uv validator.IUserValidator
 }
 
-// これは何に使うのかわかってない
 func NewUserUsecase(ur repository.IUserRepository, uv validator.IUserValidator) IUserUsecase {
 	return &userUsecase{ur, uv}
 }
@@ -191,16 +218,13 @@ func (uu *userUsecase) SignUp(user model.User) (model.UserResponse, error) {
 	if err != nil {
 		return model.UserResponse{}, err
 	}
-    // インスタンスみたいな感じ
 	newUser := model.User{Email: user.Email, Password: string(hash)}
-
-    // repositoryとのやりとり
 	if err := uu.ur.CreateUser(&newUser); err != nil {
 		return model.UserResponse{}, err
 	}
 	resUser := model.UserResponse{
-		ID:    newUser.ID,
-		Email: newUser.Email,
+		UserID: newUser.UserID,
+		Email:  newUser.Email,
 	}
 	return resUser, nil
 }
@@ -222,7 +246,7 @@ func (uu *userUsecase) Login(user model.User) (string, error) {
 	}
 	// Cookieにトークンを入れておく
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"user_id": storedUser.ID,
+		"user_id": storedUser.UserID,
 		"exp":     time.Now().Add(time.Hour * 12).Unix(),
 	})
 	// jwtトークンを生成するための鍵(?)を持ってくる
@@ -232,10 +256,8 @@ func (uu *userUsecase) Login(user model.User) (string, error) {
 	}
 	return tokenString, nil
 }
+
 ```
-
-説明するよりコード見てもらった方が早そう。
-
 
 ## controller
 
@@ -341,12 +363,13 @@ import (
 	"kadai-notifier/controller"
 	"net/http"
 	"os"
+	echojwt "github.com/labstack/echo-jwt/v4"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func NewRouter(uc controller.IUserController) *echo.Echo {
+func NewRouter(uc controller.IUserController, tc controller.IReviewController) *echo.Echo {
 	e := echo.New()
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"http://localhost:3000", os.Getenv("FE_URL")},
@@ -367,16 +390,13 @@ func NewRouter(uc controller.IUserController) *echo.Echo {
 	e.POST("/login", uc.LogIn)
 	e.POST("/logout", uc.LogOut)
 	e.GET("/csrf", uc.CsrfToken)
-	// t := e.Group("/tasks")
-	// t.Use(echojwt.WithConfig(echojwt.Config{
-	// 	SigningKey:  []byte(os.Getenv("SECRET")),
-	// 	TokenLookup: "cookie:token",
-	// }))
-	// t.GET("", tc.GetAllTasks)
-	// t.GET("/:taskId", tc.GetTaskById)
-	// t.POST("", tc.CreateTask)
-	// t.PUT("/:taskId", tc.UpdateTask)
-	// t.DELETE("/:taskId", tc.DeleteTask)
+	t := e.Group("/review")
+	t.Use(echojwt.WithConfig(echojwt.Config{
+		SigningKey:  []byte(os.Getenv("SECRET")),
+		TokenLookup: "cookie:token",
+	}))
+	t.GET("/:LectureID", tc.GetReview)
+	t.POST("", tc.PostReview)
 	return e
 }
 ```
