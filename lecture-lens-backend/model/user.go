@@ -12,14 +12,7 @@ type User struct {
 }
 
 type UserResponse struct {
-<<<<<<< HEAD
-	UserID    uint      `json:"userid" gorm:"primaryKey"`
-	UserName  string    `json:"username"`
-	Email     string    `json:"email" gorm:"unique"`
-}
-=======
 	UserID   uint   `json:"userid" gorm:"primaryKey"`
-	UserName string `json:username`
+	UserName string `json:"username"`
 	Email    string `json:"email" gorm:"unique"`
 }
->>>>>>> e4d32e0 (update Auth)
