@@ -59,15 +59,10 @@ modelはデータの定義、repository はDBと直接のやりとり、usecase 
 ## model
 データの定義を行う。Userというデータを操作したい場合は以下のように定義する。
 ```Go
-// ./model/user.go
-
-package model
-
-import "time"
+// ./model/model.go
 
 type User struct {
-	UserID    uint      `json:"userid" gorm:"primaryKey"`
-	UserName  string    `json:username`
+	ID        uint      `json:"id" gorm:"primaryKey"`
 	Email     string    `json:"email" gorm:"unique"`
 	Password  string    `json:"password"`
 	CreatedAt time.Time `json:"created_at"`
@@ -75,33 +70,8 @@ type User struct {
 }
 
 type UserResponse struct {
-	UserID    uint      `json:"userid" gorm:"primaryKey"`
-	UserName  string    `json:username`
-	Email     string    `json:"email" gorm:"unique"`
-}
-```
-
-また，Reviewについても同様に定義する．
-```Go
-// ./model/review.go
-
-package model
-
-type Review struct {
-	ReviewID        uint      `json:"review_id" gorm:"primaryKey"`
-	ReviewerID      string    `json:"reviewer_id"`
-	ReviewerName    string    `json:"reviewer_name"`
-	LectureID       uint      `json:"lecture_id"`
-	Review_Content  string    `json:"review_content"`
-	Review_Star     uint      `json:"review_star"`
-}
-
-type ReviewResponse struct {
-	ReviewID        uint      `json:"review_id" gorm:"primaryKey"`
-	LectureID       uint      `json:"lecture_id"`
-	ReviewerName    string    `json:"reviewer_name"`
-	Review_content  string    `json:"review_content"`
-	Review_star     uint      `json:"review_star"`
+	ID    uint   `json:"id" gorm:"primaryKey"`
+	Email string `json:"email" gorm:"unique"`
 }
 
 ```

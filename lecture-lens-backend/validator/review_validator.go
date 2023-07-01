@@ -25,7 +25,7 @@ func (uu *ReviewValidator) ReviewValidate(review model.Review) error {
 			validation.RuneLength(1, 100).Error("limited max 20 char"),
 		),
 		validation.Field(
-			&review.Review_Content,
+			&review.ReviewContent,
 			validation.Required.Error("Review_Content is required"),
 			validation.RuneLength(1, 100).Error("limited max 100 char"),
 		),

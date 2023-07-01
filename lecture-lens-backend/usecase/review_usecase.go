@@ -14,8 +14,6 @@ import (
 type IReviewUsecase interface {
 	PostReview(review model.Review) (model.ReviewResponse, error)
 	GetReview(review model.Review) (model.ReviewResponse, error)
-	// SignUp(review model.Review) (model.ReviewResponse, error)
-	// Login(review model.Review) (string, error)
 }
 
 type reviewUsecase struct {
@@ -27,37 +25,38 @@ func NewReviewUsecase(ur repository.IReviewRepository, uv validator.IReviewValid
 	return &reviewUsecase{ur, uv}
 }
 
-// func (uu *reviewUsecase) PostReview(review model.Review) (model.ReviewResponse, error) {
-// 	hash, err := bcrypt.GenerateFromPassword([]byte(review.Password), 10)
-// 	if err != nil {
-// 		return model.ReviewResponse{}, err
-// 	}
-// 	newReview := model.Review{Email: review.Email, Password: string(hash)}
-// 	if err := uu.ur.CreateReview(&newReview); err != nil {
-// 		return model.ReviewResponse{}, err
-// 	}
-// 	resReview := model.ReviewResponse{
-// 		ID:    newReview.ID,
-// 		Email: newReview.Email,
-// 	}
-// 	return resReview, nil
-// }
+func (uu *reviewUsecase) PostReview(review model.Review) (model.ReviewResponse, error) {
+	// 一旦初期値を定める
+	newReview := model.Review{LectureID: review.LectureID, ReviewID: 0}
+	if err := uu.ur.CreateReview(&newReview); err != nil {
+		return model.ReviewResponse{}, err
+	}
+	resReview := model.ReviewResponse{
+		ReviewerName:  newReview.ReviewerName,
+		ReviewContent: newReview.ReviewContent,
+		ReviewStar:	   newReview.ReviewStar,
+	}
+	return resReview, nil
+}
 
-// func (uu *reviewUsecase) GetReview(review model.Review) (string, error) {
-// 	// ユーザが存在するか調べる
-// 	if err := uu.uv.ReviewValidate(review); err != nil {
-// 		return "", err
-// 	}
-// 	// ユーザが存在していれば、保存されているユーザ情報を持ってくる
-// 	storedReview := model.Review{}
-// 	if err := uu.ur.GetReviewByEmail(&storedReview, review.Email); err != nil {
-// 		return "", err
-// 	}
-// 	// パスワードが合致するか調べる
-// 	err := bcrypt.CompareHashAndPassword([]byte(storedReview.Password), []byte(review.Password))
-// 	if err != nil {
-// 		return "", err
-// 	}
+func (uu *reviewUsecase) GetReview(review model.Review) (string, error) {
+	// ユーザが存在するか調べる
+	if err := uu.uv.ReviewValidate(review); err != nil {
+		return "", err
+	}
+	// ユーザが存在していれば、保存されているユーザ情報を持ってくる
+	storedReview := model.Review{}
+	if err := uu.ur.GetReviewByLectureID(&storedReview, review.lectureID); err != nil {
+		return "", err
+	}
+	
+	// パスワードが合致するか調べる
+	err := bcrypt.CompareHashAndPassword([]byte(storedReview.Password), []byte(review.Password))
+	if err != nil {
+		return "", err
+	}
+	return nil
+}
 // 	// Cookieにトークンを入れておく
 // 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 // 		"review_id": storedReview.ID,
@@ -69,4 +68,13 @@ func NewReviewUsecase(ur repository.IReviewRepository, uv validator.IReviewValid
 // 		return "", err
 // 	}
 // 	return tokenString, nil
+// }
+
+// ReviewIDの付与
+// func generateReviewID() uint {
+//     // 任意の方法でユニークなIDを生成する
+//     // 例えば、UUIDやシーケンシャルな番号などを使用する
+//     // ここでは単純にカウンターをインクリメントしていく例を示す
+//     reviewIDCounter++
+//     return reviewIDCounter
 // }
