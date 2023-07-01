@@ -1,0 +1,176 @@
+.evalution{
+    height:756px;
+    width:1300px;
+    padding:50px;
+    border-bottom: 5px solid rgb(124,116,168);
+}
+
+.header-left{
+    width:40%;
+    height:100%;
+    float:left;
+}
+
+.header-right{
+    width:60%;
+    height:100%;
+    float:right;
+}
+
+.header-right-block1{
+    height:30%;
+    width: 100%;
+
+
+}
+
+.header-right-block2{
+    height:20%;
+    width: 100%;
+   
+}
+
+.header-right-block3{
+    height:50%;
+    width: 100%;
+}
+
+/* ここから上は変えないで〜〜〜〜〜〜〜*/
+
+.rank_image{
+    width:80%;
+    height: auto;
+    float:left;
+    padding-bottom: 20px;
+}
+
+.total_image{
+    width:70%;
+    height:auto;
+    float:left;
+}
+
+h1{
+    font-size: 70px;
+    max-width: 80%;
+    font-weight: 700;
+    float:left;
+    margin-top: 50px;
+    z-index: 0;
+    position:relative;
+    
+}
+
+.review-button{
+    height:80px;
+    width:80px;
+    float:right;
+    border-radius: 50%;
+    background-color:rgb(124,116,168);
+    margin-right:30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    transition-duration: 0.4s;
+}
+
+.review-button:hover{
+    color:white;
+}
+
+/*.review-button:before{
+    content: "";
+    position: absolute;
+    transition-duration: 0.4s;
+}
+
+.review-button:hover:before{
+    content: "レビューを書く";
+    color:white;
+    padding-left:100px;
+    font-size: 15px;
+    position:absolute;
+    z-index: 10;
+}
+
+.review-button:hover {
+    width:160px;
+    border-radius: 15%;
+    background-color: rgb(124,116,168);
+    padding-right: 80px;
+    color: white;
+    position:absolute;
+    z-index: 10;
+}*/
+
+
+
+
+.header-right-block2 p{
+    float:left;
+    padding-right: 20px;
+    font-size: 30px;
+}
+
+.syllabus-button{
+    height:80px;
+    width:80px;
+    float:right;
+    border-radius: 50%;
+    line-height:80px;
+    text-align:center;
+    background-color:rgb(124,116,168);
+    margin-right:30px;
+    position:relative;
+    transition-duration: 0.4s;
+    overflow:hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 80px;
+    box-sizing: border-box;
+}
+
+.syllabus-button:hover {
+    background-color: rgb(124,116,168);
+    width:200px;
+    border-radius: 50px;
+    color:white;
+}
+
+.syllabus-button span {
+    position: absolute;
+    left: 100%;
+    transition: 0.4s all;
+    white-space: nowrap;
+}
+
+.syllabus-button:hover span {
+    left: calc(100% - 60px);
+}
+
+
+
+
+.graph_image {
+    
+    float:left;
+}
+
+.attendance{
+    font-size:30px;
+}
+
+.circle{
+    height:200px;
+    width:200px;
+    float:right;
+    border-radius: 50%;
+    line-height:80px;
+    text-align:center;
+    background-color: #11fafa;
+    margin-top: 20px;
+    margin-right:100px;
+}
