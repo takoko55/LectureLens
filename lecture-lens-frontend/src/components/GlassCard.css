@@ -1,0 +1,44 @@
+.glass-card {
+  width: 20%;
+  background: rgba(184, 192, 255, 0.187);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: inline-block;
+  margin: 10px;
+  color: white;
+  text-align: center;
+}
+
+.glass-card:hover {
+  background-color: rgba(255, 255, 255, 0.436);
+  border: 1px solid rgba(255, 255, 255, 0.74);
+  cursor: pointer;
+}
+
+.search-result-card {
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px 0px 0px 10px;
+  margin: 25px 30px 20px 30px;
+}
+
+.glass-card__image-container {
+  padding: 5px;
+}
+
+.className {
+  font-weight: bold;
+  margin: 3px 0px 3px 0px;
+  color: rgb(255, 255, 255);
+}
+
+.lecture-icon {
+  display: flex;
+}
+
+.icon {
+  color: rgb(255, 209, 104);
+}
