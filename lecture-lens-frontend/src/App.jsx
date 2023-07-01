@@ -6,6 +6,7 @@ import { SyllabusSearch } from "./components/SyllabusSearch/SyllabusSearch";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Auth } from "./components/Auth/Auth";
 import { LoginLectureSearch } from "./components/LoginPage/LoginLectureSearch";
+import { LecturePage } from "./components/LectureReview/LecturePage";
 
 export const App = () => {
   useEffect(() => {
@@ -25,6 +26,7 @@ export const App = () => {
           <Route path={`/`} element={<SyllabusSearch />}></Route>
           <Route path={`/Auth`} element={<Auth />}></Route>
           <Route path={`/LoginLectureSearch`} element={<LoginLectureSearch />}></Route>
+          <Route path={`/LecturePage`} element={<LecturePage />}></Route>
         </Routes>
       </BrowserRouter>
     </>
