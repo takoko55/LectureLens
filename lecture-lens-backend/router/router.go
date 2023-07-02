@@ -36,7 +36,7 @@ func NewRouter(uc controller.IUserController, rc controller.IReviewController) *
 		SigningKey:  []byte(os.Getenv("SECRET")),
 		TokenLookup: "cookie:token",
 	}))
-	r.GET("/GetReview", rc.GetReview)
+	r.POST("/GetReview", rc.GetReview)
 	r.POST("/PostReview", rc.CreateReview)
 	return e
 }
