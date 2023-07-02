@@ -6,11 +6,16 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	// "github.com/golang-jwt/jwt/v4"
 )
+
 
 type IReviewController interface {
 	GetReview(c echo.Context) error
+	// GetReviewById(c echo.Context) error
 	PostReview(c echo.Context) error
+	// UpdateReview(c echo.Context) error
+	// DeleteReview(c echo.Context) error
 }
 
 type reviewController struct {
@@ -22,33 +27,83 @@ func NewReviewController(ru usecase.IReviewUsecase) IReviewController {
 }
 
 func (rc *reviewController) GetReview(c echo.Context) error {
-	// リクエストパラメータからレビュー情報を取得するなどの処理を行う
-	review := model.Review{}
-	if err := c.Bind(&review); err != nil {
-		return c.JSON(http.StatusBadRequest, err.Error())
-	}
+	// user := c.Get("user").(*jwt.Token)
+	// claims := user.Claims.(jwt.MapClaims)
 
-	// レビュー情報の取得をUseCaseに委譲する
-	resReview, err := rc.ru.GetReview(review)
+	// // userID := claims["user_id"]
+	// lectureID := c.Param("lecture_id")
+
+	review := model.Review{}
+	reviewRes, err := rc.ru.GetReview(review)
+
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
-
-	return c.JSON(http.StatusOK, resReview)
+	return c.JSON(http.StatusOK, reviewRes)
 }
+
+// func (tc *reviewController) GetReviewById(c echo.Context) error {
+// 	user := c.Get("user").(*jwt.Token)
+// 	claims := user.Claims.(jwt.MapClaims)
+// 	userId := claims["user_id"]
+// 	id := c.Param("reviewId")
+// 	reviewId, _ := strconv.Atoi(id)
+// 	reviewRes, err := tc.tu.GetReviewById(uint(userId.(float64)), uint(reviewId))
+// 	if err != nil {
+// 		return c.JSON(http.StatusInternalServerError, err.Error())
+// 	}
+// 	return c.JSON(http.StatusOK, reviewRes)
+// }
+
 
 func (rc *reviewController) PostReview(c echo.Context) error {
-	// リクエストボディからレビュー情報を取得するなどの処理を行う
+	// user := c.Get("user").(*jwt.Token)
+	// claims := user.Claims.(jwt.MapClaims)
+
+	// userID := claims["user_id"]
+	// lectureID := c.Param("lecture_id")
+	// review_content := c.Param("review_content")
+
 	review := model.Review{}
 	if err := c.Bind(&review); err != nil {
-		return c.JSON(http.StatusBadRequest, err.Error())
-	}
-
-	// レビューの投稿をUseCaseに委譲する
-	resReview, err := rc.ru.PostReview(review)
+        return c.JSON(http.StatusBadRequest, err.Error())
+    }
+	reviewRes, err := rc.ru.PostReview(review)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, err.Error())
-	}
-
-	return c.JSON(http.StatusCreated, resReview)
+        return c.JSON(http.StatusInternalServerError, err.Error())
+    }
+	return c.JSON(http.StatusCreated, reviewRes)
 }
+
+
+// func (tc *reviewController) UpdateReview(c echo.Context) error {
+// 	user := c.Get("user").(*jwt.Token)
+// 	claims := user.Claims.(jwt.MapClaims)
+// 	userId := claims["user_id"]
+// 	id := c.Param("reviewId")
+// 	reviewId, _ := strconv.Atoi(id)
+
+// 	review := model.Review{}
+// 	if err := c.Bind(&review); err != nil {
+// 		return c.JSON(http.StatusBadRequest, err.Error())
+// 	}
+// 	reviewRes, err := tc.tu.UpdateReview(review, uint(userId.(float64)), uint(reviewId))
+// 	if err != nil {
+// 		return c.JSON(http.StatusInternalServerError, err.Error())
+// 	}
+// 	return c.JSON(http.StatusOK, reviewRes)
+// }
+
+// func (tc *reviewController) DeleteReview(c echo.Context) error {
+// 	user := c.Get("user").(*jwt.Token)
+// 	claims := user.Claims.(jwt.MapClaims)
+// 	userId := claims["user_id"]
+// 	id := c.Param("reviewId")
+// 	reviewId, _ := strconv.Atoi(id)
+
+// 	err := tc.tu.DeleteReview(uint(userId.(float64)), uint(reviewId))
+// 	if err != nil {
+// 		return c.JSON(http.StatusInternalServerError, err.Error())
+// 	}
+// 	return c.NoContent(http.StatusNoContent)
+// }

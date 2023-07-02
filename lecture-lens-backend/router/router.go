@@ -10,7 +10,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func NewRouter(uc controller.IUserController, tc controller.IReviewController) *echo.Echo {
+func NewRouter(uc controller.IUserController, rc controller.IReviewController) *echo.Echo {
 	e := echo.New()
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"http://localhost:3000", os.Getenv("FE_URL")},
@@ -31,12 +31,12 @@ func NewRouter(uc controller.IUserController, tc controller.IReviewController) *
 	e.POST("/login", uc.LogIn)
 	e.POST("/logout", uc.LogOut)
 	e.GET("/csrf", uc.CsrfToken)
-	t := e.Group("/review")
-	t.Use(echojwt.WithConfig(echojwt.Config{
+	r := e.Group("/review")
+	r.Use(echojwt.WithConfig(echojwt.Config{
 		SigningKey:  []byte(os.Getenv("SECRET")),
 		TokenLookup: "cookie:token",
 	}))
-	t.GET("/GetReview", tc.GetReview)
-	t.POST("/PostReview", tc.PostReview)
+	r.GET("/GetReview", rc.GetReview)
+	r.POST("/PostReview", rc.PostReview)
 	return e
 }
