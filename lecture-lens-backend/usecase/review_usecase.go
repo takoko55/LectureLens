@@ -44,11 +44,12 @@ func (uu *reviewUsecase) PostReview(review model.Review) (model.ReviewResponse, 
 }
 
 func (uu *reviewUsecase) GetReview(review model.Review) (model.ReviewResponse, error) {
-	// ユーザが存在するか調べる
+	// レビューをvalidate
+	// これ PostReviewにも欲しくない？
 	if err := uu.uv.ReviewValidate(review); err != nil {
 		return model.ReviewResponse{}, err
 	}
-	// ユーザが存在していれば、保存されているユーザ情報を持ってくる
+	// 欲しいレビューをDBから取得
 	storedReview := model.Review{}
 	if err := uu.ur.GetReviewByLectureID(&storedReview, review.LectureID); err != nil {
 		return model.ReviewResponse{}, err

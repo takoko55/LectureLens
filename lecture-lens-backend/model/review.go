@@ -2,7 +2,7 @@ package model
 
 type Review struct {
 	ID            uint   `json:"id" gorm:"primaryKey"`
-	ReviewerID    string `json:"reviewer_id"`
+	ReviewerID    uint   `json:"reviewer_id"`
 	ReviewerName  string `json:"reviewer_name"`
 	LectureID     uint   `json:"lecture_id"`
 	ReviewContent string `json:"review_content"`
