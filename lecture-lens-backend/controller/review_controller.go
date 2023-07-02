@@ -4,6 +4,7 @@ import (
 	"kadai-notifier/model"
 	"kadai-notifier/usecase"
 	"net/http"
+	"strconv"
 
 	"github.com/labstack/echo/v4"
 	// "github.com/golang-jwt/jwt/v4"
@@ -31,10 +32,12 @@ func (rc *reviewController) GetReview(c echo.Context) error {
 	// claims := user.Claims.(jwt.MapClaims)
 
 	// // userID := claims["user_id"]
-	// lectureID := c.Param("lecture_id")
+	lectureid := c.Param("lecture_id")
+
+	lectureID, _ := strconv.Atoi(lectureid)
 
 	review := model.Review{}
-	reviewRes, err := rc.ru.GetReview(review)
+	reviewRes, err := rc.ru.GetReview(review, uint(lectureID))
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err.Error())

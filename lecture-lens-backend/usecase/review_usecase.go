@@ -12,7 +12,7 @@ import (
 
 type IReviewUsecase interface {
 	PostReview(review model.Review) (model.ReviewResponse, error)
-	GetReview(review model.Review) (model.ReviewResponse, error)
+	GetReview(review model.Review, lecture_id uint) (model.ReviewResponse, error)
 }
 
 type reviewUsecase struct {
@@ -43,7 +43,7 @@ func (ru *reviewUsecase) PostReview(review model.Review) (model.ReviewResponse, 
 	return resReview, nil
 }
 
-func (ru *reviewUsecase) GetReview(review model.Review) (model.ReviewResponse, error) {
+func (ru *reviewUsecase) GetReview(review model.Review, lecture_id uint) (model.ReviewResponse, error) {
 	// レビューをvalidate
 	// これ PostReviewにも欲しくない？
 	if err := ru.rv.ReviewValidate(review); err != nil {
@@ -51,7 +51,7 @@ func (ru *reviewUsecase) GetReview(review model.Review) (model.ReviewResponse, e
 	}
 	// 欲しいレビューをDBから取得
 	storedReview := model.Review{}
-	if err := ru.rr.GetReviewByLectureID(&storedReview, review.LectureID); err != nil {
+	if err := ru.rr.GetReviewByLectureID(&storedReview, lecture_id); err != nil {
 		return model.ReviewResponse{}, err
 	}
 
