@@ -29,6 +29,7 @@ func (ur *reviewRepository) GetReviewByLectureID(review *model.Review, lecture_i
 	return nil
 }
 
+// OK!
 func (ur *reviewRepository) CreateReview(review *model.Review) error {
 	if err := ur.db.Create(review).Error; err != nil {
 		return err
