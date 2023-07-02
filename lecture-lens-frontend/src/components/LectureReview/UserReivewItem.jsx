@@ -5,10 +5,10 @@ import { useMutateReview } from '../hooks/useMutateReview'
 
 // memoによってコンポーネントに変更がない場合の再レンダリングを防ぐ
 
-const TaskReviewMemo = ({
-  ReviewID,
+const ReviewMemo = ({
+  ID,
   ReviewerID,
-  ReviewerNames,
+  ReviewerName,
   LectureID,
   Review_Content,
   Review_Star
@@ -23,9 +23,9 @@ const TaskReviewMemo = ({
           className="h-5 w-5 mx-1 text-blue-500 cursor-pointer"
           onClick={() => {
             updateReview({
-                ReviewID: ReviewID,
+                ID: ID,
                 ReviewerID: ReviewerID,
-                ReviewerNames: ReviewerNames,
+                ReviewerName: ReviewerName,
                 LectureID: LectureID,
                 Review_Content: Review_Content,
                 Review_Star: Review_Star
@@ -42,4 +42,4 @@ const TaskReviewMemo = ({
     </li>
   )
 }
-export const TaskItem = memo(TaskReviewMemo)
+export const ReviewItem = memo(ReviewMemo)

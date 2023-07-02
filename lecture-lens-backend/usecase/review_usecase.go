@@ -6,7 +6,6 @@ import (
 	"kadai-notifier/validator"
 	// "os"
 	// "time"
-
 	// "github.com/golang-jwt/jwt/v4"
 	// "golang.org/x/crypto/bcrypt"
 )
@@ -27,14 +26,19 @@ func NewReviewUsecase(ur repository.IReviewRepository, uv validator.IReviewValid
 
 func (uu *reviewUsecase) PostReview(review model.Review) (model.ReviewResponse, error) {
 	// 一旦初期値を定める
-	newReview := model.Review{LectureID: review.LectureID, ReviewID: 0}
+	newReview := model.Review{
+		LectureID:     review.LectureID,
+		ReviewerName:  review.ReviewerName,
+		ReviewContent: review.ReviewContent,
+		ReviewStar:    review.ReviewStar,
+	}
 	if err := uu.ur.CreateReview(&newReview); err != nil {
 		return model.ReviewResponse{}, err
 	}
 	resReview := model.ReviewResponse{
 		ReviewerName:  newReview.ReviewerName,
 		ReviewContent: newReview.ReviewContent,
-		ReviewStar:	   newReview.ReviewStar,
+		ReviewStar:    newReview.ReviewStar,
 	}
 	return resReview, nil
 }
@@ -49,12 +53,12 @@ func (uu *reviewUsecase) GetReview(review model.Review) (model.ReviewResponse, e
 	if err := uu.ur.GetReviewByLectureID(&storedReview, review.LectureID); err != nil {
 		return model.ReviewResponse{}, err
 	}
-	
+
 	resReview := model.ReviewResponse{
-		ReviewID:       storedReview.ReviewID,
-		ReviewerName:   storedReview.ReviewerName,
-		ReviewContent:  storedReview.ReviewContent,
-		ReviewStar:     storedReview.ReviewStar,
+		ID:            storedReview.ID,
+		ReviewerName:  storedReview.ReviewerName,
+		ReviewContent: storedReview.ReviewContent,
+		ReviewStar:    storedReview.ReviewStar,
 	}
 
 	return resReview, nil
@@ -71,8 +75,6 @@ func (uu *reviewUsecase) GetReview(review model.Review) (model.ReviewResponse, e
 // 	if err := uu.ur.GetReviewByLectureID(&storedReview, review.lectureID); err != nil {
 // 		return "", err
 // 	}
-	
-
 
 // 	// パスワードが合致するか調べる
 // 	err := bcrypt.CompareHashAndPassword([]byte(storedReview.Password), []byte(review.Password))

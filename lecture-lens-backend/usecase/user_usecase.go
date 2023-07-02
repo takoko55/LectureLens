@@ -37,8 +37,9 @@ func (uu *userUsecase) SignUp(user model.User) (model.UserResponse, error) {
 	}
 	// IDはUserに入力してもらうのではなく，Emailを元にhashにした値にする．
 	resUser := model.UserResponse{
-		UserID: newUser.ID,
-		Email:  newUser.Email,
+		UserID:   newUser.ID,
+		Email:    newUser.Email,
+		UserName: newUser.UserName,
 	}
 	return resUser, nil
 }
@@ -60,8 +61,8 @@ func (uu *userUsecase) Login(user model.User) (string, error) {
 	}
 	// Cookieにトークンを入れておく
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"user_id": storedUser.ID,
-		"exp":     time.Now().Add(time.Hour * 12).Unix(),
+		"id":  storedUser.ID,
+		"exp": time.Now().Add(time.Hour * 12).Unix(),
 	})
 	// jwtトークンを生成するための鍵(?)を持ってくる
 	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
