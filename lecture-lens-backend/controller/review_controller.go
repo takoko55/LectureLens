@@ -34,10 +34,10 @@ func (rc *reviewController) GetReview(c echo.Context) error {
 	// // userID := claims["user_id"]
 	lectureid := c.Param("lecture_id")
 
-	lectureID, _ := uint(strconv.Atoi(lectureid))
+	lectureID, _ := strconv.Atoi(lectureid)
 
 	review := model.Review{}
-	reviewRes, err := rc.ru.GetReview(review, lectureID)
+	reviewRes, err := rc.ru.GetReview(review, uint(lectureID))
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err.Error())
