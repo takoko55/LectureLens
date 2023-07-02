@@ -3,8 +3,7 @@
 講義のレビューを投稿できるサービス
 </samp>
 
-
-https://github.com/takoko55/LectureLens/assets/95068237/b487d8f5-92f4-442e-9992-9adb5dcbe9bd
+https://github.com/hirafish/LectureLens/assets/95068237/815f2999-6b6d-44b2-9825-d00e1b874f5c
 
 
 
