@@ -11,7 +11,7 @@ export const useMutateReview = () => {
   
   const createReviewMutation = useMutation(
     (review) =>
-      axios.post(`${process.env.REACT_APP_API_URL}/PostReview`, review),
+      axios.post(`${process.env.REACT_APP_API_URL}/review/PostReview`, review),
     {
       onSuccess: (res) => {
         const previousReviews = queryClient.getQueryData(['PostReview'])
