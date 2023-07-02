@@ -1,0 +1,23 @@
+.comment-contents{
+    width:1400px;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    background-color: white;
+
+}
+
+.comment-left{
+    width: 30%;
+    height: 100%;
+    float: left;
+    background-color: violet;
+}
+
+.comment-right{
+    width: 70%;
+    height: 100%;
+    float: right;
+}

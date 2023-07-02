@@ -1,6 +1,7 @@
 import { memo } from 'react'
-import useStore from '../store'
-import { useMutateReview } from '../hooks/useMutateReview'
+import './ReviewItem.css';
+//import useStore from '../store'
+//import { useMutateReview } from '../hooks/useMutateReview'
 
 // memoによってコンポーネントに変更がない場合の再レンダリングを防ぐ
 
@@ -10,12 +11,26 @@ const ReviewMemo = ({
   Review_Star
 }) => {
   return (
-    <li className="my-3">
-      <span className="font-bold">{ReviewerName}{Review_Star}</span>
-      <div className="flex float-right ml-20">
-        {Review_Content}
+    <>
+      <div class="comment-contents">
+        <div class="comment-left">
+          <p>{ReviewerName}</p>
+          <div class="review-star">
+            <p>{Review_Star}</p>
+          </div>
+          
+        </div>
+
+        <div class="comment-right">
+          <p>{Review_Content}</p>
+        </div>
       </div>
-    </li>
+      
+    
+    </>
+
+
+    
   )
 }
 export const ReviewItem = memo(ReviewMemo)

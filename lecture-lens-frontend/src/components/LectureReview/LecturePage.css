@@ -1,11 +1,17 @@
-
+.lecture-page{
+    height:100%;
+    width: 1400px;
+    background-color: rgba(255, 255, 255, 0.628);
+    border-radius: 10%;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    margin-top: 50px;
+}
 
 .evalution{
     height:756px;
-    width:1300px;
-    padding:50px;
+    width:1200px;
+    padding:50px 50px 0px 50px ;
     border-bottom: 5px solid rgb(124,116,168);
-    background-color: white;
     margin-top: 50px;
 }
 
@@ -186,4 +192,18 @@ h1{
 
 .lecture-icon{
     font-size:150%
+}
+
+.comment h2{
+    
+    height:30px;
+    width:1300px;
+    text-align: center;
+
+}
+
+.bottom-review-button{
+    height:50px;
+    width:100px;
+    background-color:rgb(124,116,168);
 }

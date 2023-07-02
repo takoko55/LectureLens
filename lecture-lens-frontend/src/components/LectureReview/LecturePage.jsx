@@ -2,10 +2,11 @@ import React from 'react';
 import './LecturePage.css';
 import { AiOutlineFileText, AiTwotoneEdit } from "react-icons/ai";
 import {useLocation} from "react-router-dom";
+import { ReviewItem } from "./ReviewItem";
 //import Syllabus_dict from "../data/syllabus.json";
 
 export const LecturePage = () => {
-  const image_url = "/images/A.png";
+  const image_url = "/images/S_touka.png";
   //const class_name = "データ分析演習"; //8文字かあ
   //const teacher_name = "松本真一";
   //const class_code = "B3A01";
@@ -45,7 +46,8 @@ export const LecturePage = () => {
   ]
 
   return (
-    <> 
+    <>
+    <div class="lecture-page"> 
       <div class = "evalution">
         <div class="header-left">
           <img class="rank-image" src={image_url} />
@@ -85,8 +87,15 @@ export const LecturePage = () => {
       </div>
 
       <div class="comment">
-
+        <h2>みんなのコメント</h2>
+        <div class="comment-block">
+          <ReviewItem ReviewerName={"田中"} Review_Content={"激おもろ"} Review_Star={"5"}/>
+        </div>
+        <div class="bottom-review-button">
+          <p><AiTwotoneEdit />　レビューを書く</p>
+        </div>
       </div>
+    </div>
     </>
     );
 };
