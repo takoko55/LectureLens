@@ -1,0 +1,35 @@
+.header-title{
+    font-size:50px
+}
+
+.post-form{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.post_review_content{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    height: 200px;
+    width: 500px;
+    margin-right: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+
+}
+
+.post_review_star{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    height: 200px;
+    width: 200px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}

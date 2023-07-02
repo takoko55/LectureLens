@@ -42,7 +42,7 @@ export const ReviewPost = ({ LectureID }) => {
         
       </div>
       
-
+    <div class="post-form">
       {/* // formの中身
       // 記述すべきこと
       // 1. レビューの中身
@@ -54,7 +54,8 @@ export const ReviewPost = ({ LectureID }) => {
         <input
           id = "review_content"
           className="mb-3 mr-3 px-3 py-2 border border-gray-300"
-          placeholder="Review"
+          class = "post_review_content"
+          placeholder="レビューを入力してください"
           type="text"
           onChange={(e) => updateReview({ ...editedReview, review_content: e.target.value })}
           value={editedReview.review_content || ''}
@@ -65,6 +66,7 @@ export const ReviewPost = ({ LectureID }) => {
           id = "review_star"
           className="mb-3 mr-3 px-3 py-2 border border-gray-300"
           placeholder="Review"
+          class = "post_review_star"
           type="text"
           onChange={(e) => updateReview({ ...editedReview, review_star: e.target.value })}
           value={editedReview.review_star || 0}
@@ -78,6 +80,7 @@ export const ReviewPost = ({ LectureID }) => {
           {editedReview.id === 0 ? 'Create' : 'Update'}
         </button>
       </form>
+      </div>
       
     </div>
   )
