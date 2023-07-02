@@ -215,8 +215,10 @@ export const LecturePage = () => {
           </div>
           <div class="bottom-review-button">
             <p>
+              <Link to={`/ReviewPost`}>
               <AiTwotoneEdit />
-              　レビューを書く
+               レビューを書く
+              </Link>
             </p>
           </div>
         </div>
