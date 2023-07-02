@@ -31,15 +31,15 @@ func (uu *userUsecase) SignUp(user model.User) (model.UserResponse, error) {
 		return model.UserResponse{}, err
 	}
 	// Userの構造体に含まれている4要素をここで定義．
-	UserID, err := bcrypt.GenerateFromPassword([]byte(user.Email), 10)
-	newUser := model.User{Email: user.Email, Password: string(hash), UserID: string(UserID), UserName: user.UserName}
+	newUser := model.User{Email: user.Email, Password: string(hash), UserName: user.UserName}
 	if err := uu.ur.CreateUser(&newUser); err != nil {
 		return model.UserResponse{}, err
 	}
 	// IDはUserに入力してもらうのではなく，Emailを元にhashにした値にする．
 	resUser := model.UserResponse{
-		UserID: newUser.UserID,
-		Email:  newUser.Email,
+		UserID:   newUser.ID,
+		Email:    newUser.Email,
+		UserName: newUser.UserName,
 	}
 	return resUser, nil
 }
@@ -61,8 +61,8 @@ func (uu *userUsecase) Login(user model.User) (string, error) {
 	}
 	// Cookieにトークンを入れておく
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"user_id": storedUser.UserID,
-		"exp":     time.Now().Add(time.Hour * 12).Unix(),
+		"id":  storedUser.ID,
+		"exp": time.Now().Add(time.Hour * 12).Unix(),
 	})
 	// jwtトークンを生成するための鍵(?)を持ってくる
 	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
