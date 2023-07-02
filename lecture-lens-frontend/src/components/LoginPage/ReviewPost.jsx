@@ -8,8 +8,9 @@ export const ReviewPost = ({ LectureID }) => {
   const queryClient = useQueryClient()
   const { editedReview } = useStore()
   const updateReview = useStore((state) => state.updateEditedReview)
-  console.log(useStore((state) => state.editedRev))
+  // console.log()
   // const { data, isLoading } = useQueryReviews()
+  useStore((state) => state.test)
   const { createReviewMutation, updateReviewMutation } = useMutateReview()
   const { logoutMutation } = useMutateAuth()
   const submitReviewHandler = (e) => {
