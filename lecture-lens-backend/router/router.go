@@ -37,6 +37,6 @@ func NewRouter(uc controller.IUserController, rc controller.IReviewController) *
 		TokenLookup: "cookie:token",
 	}))
 	r.GET("/GetReview", rc.GetReview)
-	r.POST("/PostReview", rc.PostReview)
+	r.POST("/PostReview", rc.CreateReview)
 	return e
 }

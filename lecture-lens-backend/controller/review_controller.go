@@ -13,7 +13,7 @@ import (
 type IReviewController interface {
 	GetReview(c echo.Context) error
 	// GetReviewById(c echo.Context) error
-	PostReview(c echo.Context) error
+	CreateReview(c echo.Context) error
 	// UpdateReview(c echo.Context) error
 	// DeleteReview(c echo.Context) error
 }
@@ -56,7 +56,7 @@ func (rc *reviewController) GetReview(c echo.Context) error {
 // }
 
 
-func (rc *reviewController) PostReview(c echo.Context) error {
+func (rc *reviewController) CreateReview(c echo.Context) error {
 	// user := c.Get("user").(*jwt.Token)
 	// claims := user.Claims.(jwt.MapClaims)
 
