@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./LecturePage.css";
 import { AiOutlineFileText, AiTwotoneEdit } from "react-icons/ai";
 import { useLocation } from "react-router-dom";
@@ -165,7 +166,10 @@ export const LecturePage = () => {
               <div class="icon-buttons">
                 <div class="review-button">
                   <span title="レビューを書く">
+                    <Link to={`/ReviewPost`}>
                     <AiTwotoneEdit class="lecture-icon" />
+                    </Link>
+                    
                   </span>
                 </div>
                 <div class="syllabus-button">
@@ -195,6 +199,7 @@ export const LecturePage = () => {
 
         <div class="comment">
           <p class="comment-title">みんなのコメント</p>
+          {review_example.map()}
           <div class="comment-block">
             <ReviewItem
               ReviewerName={"田中１号"}

@@ -10,7 +10,6 @@ import (
 	// "github.com/golang-jwt/jwt/v4"
 )
 
-
 type IReviewController interface {
 	GetReview(c echo.Context) error
 	// GetReviewById(c echo.Context) error
@@ -58,7 +57,6 @@ func (rc *reviewController) GetReview(c echo.Context) error {
 // 	return c.JSON(http.StatusOK, reviewRes)
 // }
 
-
 func (rc *reviewController) CreateReview(c echo.Context) error {
 	// user := c.Get("user").(*jwt.Token)
 	// claims := user.Claims.(jwt.MapClaims)
@@ -69,15 +67,14 @@ func (rc *reviewController) CreateReview(c echo.Context) error {
 
 	review := model.Review{}
 	if err := c.Bind(&review); err != nil {
-        return c.JSON(http.StatusBadRequest, err.Error())
-    }
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
 	reviewRes, err := rc.ru.PostReview(review)
 	if err != nil {
-        return c.JSON(http.StatusInternalServerError, err.Error())
-    }
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
 	return c.JSON(http.StatusCreated, reviewRes)
 }
-
 
 // func (tc *reviewController) UpdateReview(c echo.Context) error {
 // 	user := c.Get("user").(*jwt.Token)
