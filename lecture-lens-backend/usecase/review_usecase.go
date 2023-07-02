@@ -16,15 +16,15 @@ type IReviewUsecase interface {
 }
 
 type reviewUsecase struct {
-	ur repository.IReviewRepository
-	uv validator.IReviewValidator
+	rr repository.IReviewRepository
+	rv validator.IReviewValidator
 }
 
-func NewReviewUsecase(ur repository.IReviewRepository, uv validator.IReviewValidator) IReviewUsecase {
-	return &reviewUsecase{ur, uv}
+func NewReviewUsecase(rr repository.IReviewRepository, rv validator.IReviewValidator) IReviewUsecase {
+	return &reviewUsecase{rr, rv}
 }
 
-func (uu *reviewUsecase) PostReview(review model.Review) (model.ReviewResponse, error) {
+func (ru *reviewUsecase) PostReview(review model.Review) (model.ReviewResponse, error) {
 	// 一旦初期値を定める
 	newReview := model.Review{
 		LectureID:     review.LectureID,
@@ -32,7 +32,7 @@ func (uu *reviewUsecase) PostReview(review model.Review) (model.ReviewResponse, 
 		ReviewContent: review.ReviewContent,
 		ReviewStar:    review.ReviewStar,
 	}
-	if err := uu.ur.CreateReview(&newReview); err != nil {
+	if err := ru.rr.CreateReview(&newReview); err != nil {
 		return model.ReviewResponse{}, err
 	}
 	resReview := model.ReviewResponse{
@@ -43,15 +43,15 @@ func (uu *reviewUsecase) PostReview(review model.Review) (model.ReviewResponse, 
 	return resReview, nil
 }
 
-func (uu *reviewUsecase) GetReview(review model.Review) (model.ReviewResponse, error) {
+func (ru *reviewUsecase) GetReview(review model.Review) (model.ReviewResponse, error) {
 	// レビューをvalidate
 	// これ PostReviewにも欲しくない？
-	if err := uu.uv.ReviewValidate(review); err != nil {
+	if err := ru.rv.ReviewValidate(review); err != nil {
 		return model.ReviewResponse{}, err
 	}
 	// 欲しいレビューをDBから取得
 	storedReview := model.Review{}
-	if err := uu.ur.GetReviewByLectureID(&storedReview, review.LectureID); err != nil {
+	if err := ru.rr.GetReviewByLectureID(&storedReview, review.LectureID); err != nil {
 		return model.ReviewResponse{}, err
 	}
 
