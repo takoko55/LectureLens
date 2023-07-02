@@ -13,6 +13,29 @@ export const LecturePage = () => {
   const class_time = "火曜日3限";
   const is_attendance = "あり";
 
+  const review_example = [
+    {ID: 1,
+    ReviewerID: 1,
+    ReviewerName: "山田太郎",
+    LectureID: 1,
+    Review_Content: "とても面白かったです",
+    Review_Star: 5},
+
+    {ID: 2,
+    ReviewerID: 2,
+    ReviewerName: "田中花子",
+    LectureID: 1,
+    Review_Content: "とても面白かったです",
+    Review_Star: 5},
+    
+    {ID: 3,
+    ReviewerID: 3,
+    ReviewerName: "佐藤次郎",
+    LectureID: 1,
+    Review_Content: "とても面白かったです",
+    Review_Star: 5},
+  ]
+
   return (
     <> 
       <div class = "evalution">
