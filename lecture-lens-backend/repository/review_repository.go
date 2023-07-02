@@ -23,13 +23,13 @@ func NewReviewRepository(db *gorm.DB) IReviewRepository {
 // 構造体に対するメソッドを定義している
 // ここでは reviewRepository
 func (ur *reviewRepository) GetReviewByLectureID(review *model.Review, lecture_id uint) error {
-	if err := ur.db.Where("lecture_id=?", lecture_id).First(review).Error; err != nil {
+	if err := ur.db.Where(review, "lecture_id=?", 2).First(review).Error; err != nil {
 		return err
 	}
 	return nil
 }
 
-// OK!
+// OK!s
 func (ur *reviewRepository) CreateReview(review *model.Review) error {
 	if err := ur.db.Create(review).Error; err != nil {
 		return err
