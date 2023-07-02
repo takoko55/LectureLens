@@ -3,6 +3,7 @@ import useStore from '../../store'
 // import { useQueryReviews } from '../../hooks/useQueryReviews'
 import { useMutateReview } from '../../hooks/useMutateReview'
 import { useMutateAuth } from '../../hooks/useMutateAuth'
+import './ReviewPost.css';
 
 export const ReviewPost = ({ LectureID }) => {
   const queryClient = useQueryClient()
@@ -32,16 +33,15 @@ export const ReviewPost = ({ LectureID }) => {
   return (
     <div className="flex justify-center items-center flex-col min-h-screen text-gray-600 font-mono">
       <div className="flex items-center my-3">
-        <span className="text-center text-3xl font-extrabold">
-          Review Manager
-        </span>
+        <div class="header">
+        <span className="text-center text-3xl font-extrabold" class ="header-title">
+            Lecture Lens
+          </span>
+        </div>
+        
+        
       </div>
-      <p
-        onClick={logout}
-        className="h-6 w-6 my-6 text-blue-500 cursor-pointer"
-      >
-        logout
-      </p>
+      
 
       {/* // formの中身
       // 記述すべきこと

@@ -199,7 +199,6 @@ export const LecturePage = () => {
 
         <div class="comment">
           <p class="comment-title">みんなのコメント</p>
-          {review_example.map()}
           <div class="comment-block">
             <ReviewItem
               ReviewerName={"田中１号"}
