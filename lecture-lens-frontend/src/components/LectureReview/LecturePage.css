@@ -48,11 +48,12 @@
 
 /* ここから上は変えないで〜〜〜〜〜〜〜*/
 
-.rank_-image {
-  width: 80%;
-  height: auto;
-  float: left;
-  padding-bottom: 20px;
+.rank-image{
+    width:80%;
+    height: auto;
+    float:left;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .total-image {
@@ -160,21 +161,21 @@ h1 {
   height: auto;
 }
 
-.attendance {
-  font-size: 30px;
+.attendance{
+    font-size:30px;
+    margin-bottom: 0px;
+    margin-top: 0px;
 }
 
-.circle {
-  height: 200px;
-  width: 200px;
-  float: right;
-  border-radius: 50%;
-  line-height: 80px;
-  text-align: center;
-  background-color: #11fafa;
-  margin-top: 20px;
-  margin-right: 100px;
+.circle_image{
+    height:60%;
+    width:60%;
+    float:right;
+    text-align:center;
+    margin-top: 0px;
+    margin-right:150px;
 }
+
 
 .lecture-icon {
   font-size: 150%;

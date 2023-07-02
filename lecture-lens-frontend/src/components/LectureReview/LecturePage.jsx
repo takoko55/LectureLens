@@ -12,7 +12,7 @@ Chart.register(BarElement);
 //import Syllabus_dict from "../data/syllabus.json";
 
 export const LecturePage = () => {
-  const image_url = "/images/S_touka.png";
+  const image_url = "/images/B_touka.png";
   //const class_name = "データ分析演習"; //8文字かあ
   //const teacher_name = "松本真一";
   //const class_code = "B3A01";
@@ -27,6 +27,7 @@ export const LecturePage = () => {
   const year_term = query.get("year_term");
   const class_id = query.get("lecture_id");
   const class_url = query.get("url");
+  const circle_image = "/images/chart1_touka.png";
 
   const review_example = [
     {
@@ -151,9 +152,9 @@ export const LecturePage = () => {
             <img class="rank-image" src={image_url} />
             <div
               class="bar-container"
-              style={{ width: "95%", marginBottom: "1px" }}
+              style={{ height: "120%", width: "120%", marginBottom: "1px" }}
             >
-              review
+
               <Bar data={data} options={options} />
             </div>
           </div>
@@ -181,11 +182,12 @@ export const LecturePage = () => {
             </div>
 
             <div class="header-right-block3">
-              <img class="graph-image" src={image_url} />
 
               <div class="block3-right">
                 <p class="attendance">出席{is_attendance}</p>
-                <div class="circle"></div>
+                <div class="circle">
+                  <img class="circle_image" src={circle_image} />
+                </div>
               </div>
             </div>
           </div>
