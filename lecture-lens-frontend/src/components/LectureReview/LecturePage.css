@@ -1,8 +1,12 @@
+
+
 .evalution{
     height:756px;
     width:1300px;
     padding:50px;
     border-bottom: 5px solid rgb(124,116,168);
+    background-color: white;
+    margin-top: 50px;
 }
 
 .header-left{
@@ -37,14 +41,14 @@
 
 /* ここから上は変えないで〜〜〜〜〜〜〜*/
 
-.rank_image{
+.rank_-image{
     width:80%;
     height: auto;
     float:left;
     padding-bottom: 20px;
 }
 
-.total_image{
+.total-image{
     width:70%;
     height:auto;
     float:left;
@@ -119,25 +123,25 @@ h1{
     width:80px;
     float:right;
     border-radius: 50%;
-    line-height:80px;
-    text-align:center;
     background-color:rgb(124,116,168);
     margin-right:30px;
-    position:relative;
-    transition-duration: 0.4s;
-    overflow:hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-right: 80px;
-    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    transition-duration: 0.4s;
 }
 
-.syllabus-button:hover {
+.syllabus-button:hover{
+    color:white;
+}
+
+/*.syllabus-button:hover {
     background-color: rgb(124,116,168);
     width:200px;
     border-radius: 50px;
-    color:white;
+    overflow: visible;
 }
 
 .syllabus-button span {
@@ -145,16 +149,21 @@ h1{
     left: 100%;
     transition: 0.4s all;
     white-space: nowrap;
+    opacity: 0;
+    display: none;
 }
 
 .syllabus-button:hover span {
     left: calc(100% - 60px);
-}
+    opacity: 1;
+    display: inline;
+}*/
 
 
 
 
-.graph_image {
+
+.graph-image {
     
     float:left;
 }
@@ -173,4 +182,8 @@ h1{
     background-color: #11fafa;
     margin-top: 20px;
     margin-right:100px;
+}
+
+.lecture-icon{
+    font-size:150%
 }

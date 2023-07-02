@@ -58,7 +58,7 @@ export const GlassCard = (props) => {
     <>
       {searchFlag && countArray.length === flagArray.length && (
         <a
-          href={details.url}
+          href={"./LecturePage?lecture_id=" + details.key + "&professor_name=" + details.professor_name + "&year_term=" + details.year_term + "&name=" + details.name + "&url=" + details.url}
           target="_blank"
           rel="noreferrer"
           style={{ textDecoration: "none" }}
