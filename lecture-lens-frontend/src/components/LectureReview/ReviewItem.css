@@ -4,20 +4,68 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom:5px;
     
-    background-color: white;
 
 }
 
 .comment-left{
     width: 30%;
     height: 100%;
+    text-align: left;
+    
+    display:flex;
+    flex-direction: column;
     float: left;
-    background-color: violet;
+    border-right: 5px solid rgb(124,116,168);
 }
 
 .comment-right{
     width: 70%;
     height: 100%;
     float: right;
+    text-align: left;
+    padding-left: 20px;
+    font-size:30px
+}
+
+.reviewer-name{
+    font-size: 30px;
+    float:left;
+    margin:0;
+    padding-left: 100px;
+}
+
+.review-star{
+    float:left;
+    margin:0px;
+    font-size:20px;
+    margin:0;
+    text-align: left;
+    padding-left: 100px;
+    color:rgb(255,209,104);
+}
+
+.review-content{
+    width: 70%;
+    height: 100%;
+    margin-top:0;
+    display: inline-block;
+}
+
+.iine{
+    margin-top:0;
+    display: inline-block;
+    margin-right: 0px;
+    color:white;
+}
+
+.iine:hover{
+    cursor: pointer;
+    color: rgb(235, 57, 170);
+}
+
+.comment-block{
+    width: 90%;
+    background-color: rgba(124, 116, 168, 0.3);
 }

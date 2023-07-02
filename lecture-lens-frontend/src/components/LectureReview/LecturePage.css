@@ -5,6 +5,7 @@
     border-radius: 10%;
     border: 1px solid rgba(255, 255, 255, 0.8);
     margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .evalution{
@@ -194,16 +195,25 @@ h1{
     font-size:150%
 }
 
-.comment h2{
-    
+.comment-title{
+    font-size: 30px;
     height:30px;
-    width:1300px;
+    width:1400px;
     text-align: center;
 
 }
 
 .bottom-review-button{
-    height:50px;
-    width:100px;
+    font-size: 20px;
+    width:200px;
+    padding: 10px;
     background-color:rgb(124,116,168);
+    margin-top:50px;
+    margin-bottom: 50px;
+    vertical-align: middle;
+    border-radius: 10%;
+}
+
+.bottom-review-button:hover{
+    color:white;
 }

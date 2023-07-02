@@ -28,21 +28,21 @@ export const LecturePage = () => {
     ReviewerName: "山田太郎",
     LectureID: 1,
     Review_Content: "とても面白かったです",
-    Review_Star: 5},
+    Review_Star: 4},
 
     {ID: 2,
     ReviewerID: 2,
     ReviewerName: "田中花子",
     LectureID: 1,
     Review_Content: "とても面白かったです",
-    Review_Star: 5},
+    Review_Star: 4},
     
     {ID: 3,
     ReviewerID: 3,
     ReviewerName: "佐藤次郎",
     LectureID: 1,
     Review_Content: "とても面白かったです",
-    Review_Star: 5},
+    Review_Star: 4},
   ]
 
   return (
@@ -87,9 +87,12 @@ export const LecturePage = () => {
       </div>
 
       <div class="comment">
-        <h2>みんなのコメント</h2>
+        <p class="comment-title">みんなのコメント</p>
         <div class="comment-block">
-          <ReviewItem ReviewerName={"田中"} Review_Content={"激おもろ"} Review_Star={"5"}/>
+          <ReviewItem ReviewerName={"田中１号"} Review_Content={"課題が少なくてよかった"} Review_Star={"3"}/>
+        </div>
+        <div class="comment-block">
+          <ReviewItem ReviewerName={"ミノムシ"} Review_Content={"楽単。おすすめです。"} Review_Star={"4"}/>
         </div>
         <div class="bottom-review-button">
           <p><AiTwotoneEdit />　レビューを書く</p>

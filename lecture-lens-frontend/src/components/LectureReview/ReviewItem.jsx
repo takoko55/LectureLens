@@ -1,5 +1,6 @@
 import { memo } from 'react'
 import './ReviewItem.css';
+import{BsFillChatHeartFill} from "react-icons/bs";
 //import useStore from '../store'
 //import { useMutateReview } from '../hooks/useMutateReview'
 
@@ -14,15 +15,16 @@ const ReviewMemo = ({
     <>
       <div class="comment-contents">
         <div class="comment-left">
-          <p>{ReviewerName}</p>
+          <p class="reviewer-name">{ReviewerName}</p>
           <div class="review-star">
-            <p>{Review_Star}</p>
+            <p>{"★".repeat(Review_Star)}</p>
           </div>
           
         </div>
 
         <div class="comment-right">
-          <p>{Review_Content}</p>
+          <p class="review-content">{Review_Content}</p>
+          <p class="iine"><BsFillChatHeartFill /></p>
         </div>
       </div>
       
