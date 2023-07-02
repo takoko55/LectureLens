@@ -103,41 +103,44 @@ export const LecturePage = () => {
     return counts;
   }
   const data = {
-    // x 軸のラベル
     labels: ["1", "2", "3", "4"],
-    options: {
-      scales: {
-        yAxes: {
-          ticks: {
-            beginAtZero: true,
-            stepSize: 1,
-          },
-        },
-      },
-    },
     datasets: [
       {
         label: "Dataset",
-        // データの値
         data: countStarRatings(review_example),
-        // グラフの背景色
         backgroundColor: [
           "rgba(29, 61, 120, 0.7)",
           "rgba(84, 93,148, 0.7)",
           "rgba(146, 128, 179, 0.7)",
           "rgba(217, 170, 215, 0.7)",
         ],
-        // グラフの枠線の色
         borderColor: [
           "rgba(29, 61, 120, 1)",
           "rgba(84, 93,148, 1)",
           "rgba(146, 128, 179, 1)",
           "rgba(217, 170, 215, 1)",
         ],
-        // グラフの枠線の太さ
         borderWidth: 1,
       },
     ],
+  };
+
+  const options = {
+    // responsive: true,
+    plugins: {
+      // title: {
+      //   display: true,
+      //   text: "aaaaaaaaaaaaaaaaaaa",
+      // },
+    },
+    // scales: {
+    //   yAxes: {
+    //     ticks: {
+    //       beginAtZero: true,
+    //       stepSize: 1,
+    //     },
+    //   },
+    // },
   };
 
   return (
@@ -146,29 +149,35 @@ export const LecturePage = () => {
         <div class="evalution">
           <div class="header-left">
             <img class="rank-image" src={image_url} />
-            <div style={{ height: "95%", width: "95%", marginTop: "50px" }}>
-              <Bar data={data} />
+            <div
+              class="bar-container"
+              style={{ width: "95%", marginBottom: "1px" }}
+            >
+              review
+              <Bar data={data} options={options} />
             </div>
           </div>
 
           <div class="header-right">
             <div class="header-right-block1">
               <h1>{class_name}</h1>
-              <div class="review-button">
-                <span title="レビューを書く">
-                  <AiTwotoneEdit class="lecture-icon" />
-                </span>
+              <div class="icon-buttons">
+                <div class="review-button">
+                  <span title="レビューを書く">
+                    <AiTwotoneEdit class="lecture-icon" />
+                  </span>
+                </div>
+                <div class="syllabus-button">
+                  <a href={class_url} title="シラバス">
+                    <AiOutlineFileText class="lecture-icon" />
+                  </a>
+                </div>
               </div>
             </div>
 
             <div class="header-right-block2">
               <p class="class_credit">{year_term}</p>
               <p class="teacher_name">担当教員：{professor}</p>
-              <div class="syllabus-button">
-                <a href={class_url} title="シラバス">
-                  <AiOutlineFileText class="lecture-icon" />
-                </a>
-              </div>
             </div>
 
             <div class="header-right-block3">
