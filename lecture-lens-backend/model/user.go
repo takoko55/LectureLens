@@ -12,7 +12,7 @@ type User struct {
 }
 
 type UserResponse struct {
-	ID   uint   `json:"id" gorm:"primaryKey"`
+	UserID   uint   `json:"userid" gorm:"primaryKey"`
 	UserName string `json:"username"`
 	Email    string `json:"email" gorm:"unique"`
 }
