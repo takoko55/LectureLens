@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Auth } from "./components/Auth/Auth";
 import { LoginLectureSearch } from "./components/LoginPage/LoginLectureSearch";
 import { LecturePage } from "./components/LectureReview/LecturePage";
+import { ReviewPost } from "./components/LoginPage/ReviewPost";
 
 export const App = () => {
   useEffect(() => {
@@ -27,6 +28,7 @@ export const App = () => {
           <Route path={`/Auth`} element={<Auth />}></Route>
           <Route path={`/LoginLectureSearch`} element={<LoginLectureSearch />}></Route>
           <Route path={`/LecturePage`} element={<LecturePage />}></Route>
+          <Route path={`/ReviewPost`} element={<ReviewPost />}></Route>
         </Routes>
       </BrowserRouter>
     </>

@@ -1,19 +1,15 @@
-import { FormEvent } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
-import {
-  ArrowRightOnRectangleIcon,
-  ShieldCheckIcon,
-} from '@heroicons/react/24/solid'
-import useStore from '../store'
-import { useQueryReviews } from '../hooks/useQueryReviews'
-import { useMutateReview } from '../hooks/useMutateReview'
-import { useMutateAuth } from '../hooks/useMutateAuth'
+import useStore from '../../store'
+// import { useQueryReviews } from '../../hooks/useQueryReviews'
+import { useMutateReview } from '../../hooks/useMutateReview'
+import { useMutateAuth } from '../../hooks/useMutateAuth'
 
-export const ReviewPost = () => {
+export const ReviewPost = ({ LectureID }) => {
   const queryClient = useQueryClient()
   const { editedReview } = useStore()
   const updateReview = useStore((state) => state.updateEditedReview)
-  const { data, isLoading } = useQueryReviews()
+  console.log(useStore((state) => state.editedRev))
+  // const { data, isLoading } = useQueryReviews()
   const { createReviewMutation, updateReviewMutation } = useMutateReview()
   const { logoutMutation } = useMutateAuth()
   const submitReviewHandler = (e) => {
@@ -21,7 +17,8 @@ export const ReviewPost = () => {
     if (editedReview.id === 0)
       createReviewMutation.mutate({
         review_content: editedReview.review_content,
-        review_star: editedReview.star,
+        review_star: editedReview.review_star,
+        lecture_id: LectureID
       })
     else {
       updateReviewMutation.mutate(editedReview)
@@ -34,15 +31,16 @@ export const ReviewPost = () => {
   return (
     <div className="flex justify-center items-center flex-col min-h-screen text-gray-600 font-mono">
       <div className="flex items-center my-3">
-        <ShieldCheckIcon className="h-8 w-8 mr-3 text-indigo-500 cursor-pointer" />
         <span className="text-center text-3xl font-extrabold">
           Review Manager
         </span>
       </div>
-      <ArrowRightOnRectangleIcon
+      <p
         onClick={logout}
         className="h-6 w-6 my-6 text-blue-500 cursor-pointer"
-      />
+      >
+        logout
+      </p>
 
       {/* // formの中身
       // 記述すべきこと
@@ -53,6 +51,7 @@ export const ReviewPost = () => {
 
         {/*   ---レビューの入力 --- */}
         <input
+          id = "review_content"
           className="mb-3 mr-3 px-3 py-2 border border-gray-300"
           placeholder="Review"
           type="text"
@@ -62,11 +61,12 @@ export const ReviewPost = () => {
 
         {/*  --- 星の入力 --- */}
         <input
+          id = "review_star"
           className="mb-3 mr-3 px-3 py-2 border border-gray-300"
           placeholder="Review"
           type="text"
           onChange={(e) => updateReview({ ...editedReview, review_star: e.target.value })}
-          value={editedReview.star || 0}
+          value={editedReview.review_star || 0}
         />
 
         {/* 送信ボタン */}
@@ -77,15 +77,7 @@ export const ReviewPost = () => {
           {editedReview.id === 0 ? 'Create' : 'Update'}
         </button>
       </form>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <ul className="my-5">
-          {data?.map((review) => (
-            <TaskItem key={review.id} id={review.id} content={review.review_content} />
-          ))}
-        </ul>
-      )}
+      
     </div>
   )
 }

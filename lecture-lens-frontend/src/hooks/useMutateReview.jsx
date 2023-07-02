@@ -3,20 +3,20 @@ import { useQueryClient, useMutation } from '@tanstack/react-query'
 import useStore from '../store'
 import { useError } from './useError'
 
-export const useMutateTask = () => {
+export const useMutateReview = () => {
   const queryClient = useQueryClient()
   const { switchErrorHandling } = useError()
-  const resetEditedTask = useStore((state) => state.resetEditedReview)
+  const resetEditedReview = useStore((state) => state.resetEditedReview)
 
   
   const createReviewMutation = useMutation(
     (review) =>
-      axios.post(`${process.env.REACT_APP_API_URL}/reivews`, review),
+      axios.post(`${process.env.REACT_APP_API_URL}/PostReview`, review),
     {
       onSuccess: (res) => {
-        const previousReviews = queryClient.getQueryData(['reviews'])
+        const previousReviews = queryClient.getQueryData(['PostReview'])
         if (previousReviews) {
-          queryClient.setQueryData(['reviews'], [...previousReviews, res.data])
+          queryClient.setQueryData(['PostReview'], [...previousReviews, res.data])
         }
         resetEditedReview()
       },
@@ -58,13 +58,13 @@ export const useMutateTask = () => {
   )
 
   // レビューを削除するときのmutation
-  const deleteReivewMutation = useMutation(
+  const deleteReviewMutation = useMutation(
     (id) =>
       axios.delete(`${process.env.REACT_APP_API_URL}/reviews/${id}`),
     {
       onSuccess: (_, variables) => {
-        const previousReivews = queryClient.getQueryData(['reviews'])
-        if (previousReivews) {
+        const previousReviews = queryClient.getQueryData(['reviews'])
+        if (previousReviews) {
           queryClient.setQueryData(
             ['reviews'],
             previousReviews.filter((review) => review.id !== variables)

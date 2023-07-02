@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import { useError } from '../hooks/useError'
+import { useError } from './useError'
 
-export const useQueryTasks = () => {
+export const useQueryReviews = () => {
   const { switchErrorHandling } = useError()
   const getReviews = async () => {
     const { data } = await axios.get(
