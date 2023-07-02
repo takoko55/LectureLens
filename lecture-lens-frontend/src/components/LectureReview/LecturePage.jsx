@@ -13,7 +13,7 @@ Chart.register(BarElement);
 //import Syllabus_dict from "../data/syllabus.json";
 
 export const LecturePage = () => {
-  const image_url = "/images/B_touka.png";
+  const image_url = "/images/S_touka.png";
   //const class_name = "データ分析演習"; //8文字かあ
   //const teacher_name = "松本真一";
   //const class_code = "B3A01";
@@ -37,7 +37,7 @@ export const LecturePage = () => {
       ReviewerName: "佐藤次郎",
       LectureID: 1,
       Review_Content: "これ以上ない講義でした",
-      Review_Star: 1,
+      Review_Star: 3,
     },
     {
       ID: 3,
@@ -45,7 +45,7 @@ export const LecturePage = () => {
       ReviewerName: "佐藤次郎",
       LectureID: 1,
       Review_Content: "出席たいへん",
-      Review_Star: 2,
+      Review_Star: 4,
     },
     {
       ID: 3,
@@ -53,7 +53,7 @@ export const LecturePage = () => {
       ReviewerName: "佐藤次郎",
       LectureID: 1,
       Review_Content: "さいこうではない",
-      Review_Star: 2,
+      Review_Star: 4,
     },
     {
       ID: 3,
@@ -61,7 +61,7 @@ export const LecturePage = () => {
       ReviewerName: "佐藤次郎",
       LectureID: 1,
       Review_Content: "さいこ～",
-      Review_Star: 2,
+      Review_Star: 4,
     },
     {
       ID: 1,
@@ -210,6 +210,20 @@ export const LecturePage = () => {
             <ReviewItem
               ReviewerName={"ミノムシ"}
               Review_Content={"楽単。おすすめです。"}
+              Review_Star={"4"}
+            />
+          </div>
+          <div class="comment-block">
+            <ReviewItem
+              ReviewerName={"onigiri"}
+              Review_Content={"先輩に聞いて取ったけど、楽単でした。"}
+              Review_Star={"4"}
+            />
+          </div>
+          <div class="comment-block">
+            <ReviewItem
+              ReviewerName={"まゆ"}
+              Review_Content={"先生が優しいです"}
               Review_Star={"4"}
             />
           </div>
