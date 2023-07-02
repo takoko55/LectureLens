@@ -1,6 +1,11 @@
 # LectureLens
+<samp>
+講義のレビューを投稿できるサービス
+</samp>
 
-![image](https://github.com/takoko55/LectureLens/assets/85686284/01575de9-53f2-4bbe-ad6b-bec7cf2f5cd7)
+
+https://github.com/takoko55/LectureLens/assets/95068237/b487d8f5-92f4-442e-9992-9adb5dcbe9bd
+
 
 
 ## Overview
@@ -18,9 +23,14 @@
 -
 
 
-## Author
-
-[twitter](https://twitter.com/nazoinlife)
+## Tech & Author
+【フロントエンド】html/css, React　<br>
+ ・https://github.com/takoko55 　 <br>
+ ・https://github.com/hirafish　　<br>
+<br>
+【バックエンド】Go, Docker　<br>
+・ https://github.com/peartrees　　<br>
+・ https://github.com/dakkenkd　　<br>
 
 ## Licence
 
